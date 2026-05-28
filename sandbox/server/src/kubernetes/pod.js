@@ -1,4 +1,4 @@
-import {k8sCoreApi} from "./client.js";
+import {k8sCoreApi} from "./config.js";
 
 
 export async function createPod(sandboxId){
@@ -45,7 +45,7 @@ export async function createPod(sandboxId){
 
      }
 
-     const response=await k8sCoreV1Api.createNameSpacedPod({
+     const response=await k8sCoreApi.createNamespacedPod({
         namespace:"default",
         body:podManifest
      })
