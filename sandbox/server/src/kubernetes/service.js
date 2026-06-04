@@ -1,4 +1,4 @@
-import {k8sCoreApi} from './config.js';
+import {k8sCoreApi} from './config.js'
 
 
 export const createService=async (sandboxId)=>{
@@ -7,38 +7,38 @@ export const createService=async (sandboxId)=>{
         metadata:{
             name:`sandbox-service-${sandboxId}`,
             labels:{
-                app:'sandbox',
+                app: "sandbox",
                 sandboxId:sandboxId
             }
         },
         spec:{
             selector:{
-                app:'sandbox',
+                app: 'sandbox',
                 sandboxId:sandboxId
             },
             ports:[
                 {
-                    protocol:"TCP",
-                    port:80,
-                    targetPort:5173,
-                    name:"http"
+                    port: 80,
+                    protocol: 'TCP',
+                    targetPort: 5173,
+                    name: 'http'
+                },
+                {
+                    port: 3000,
+                    protocol: 'TCP',
+                    targetPort: 3000,
+                    name: 'agent-http'
                 }
             ],
-            type:"ClusterIP"
+            type: 'ClusterIP'
         }
     }
 
     const response=await k8sCoreApi.createNamespacedService({
-        namespace:"default",
+        namespace:'default',
         body:serviceManifest
     })
 
     return response
 
-
-
-
-
 }
-
-
